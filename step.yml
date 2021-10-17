@@ -1,0 +1,72 @@
+title: |-
+  Binary Podspec
+summary: |
+  Prepares podspec to deliver vendored framework.
+description: |
+  Prepares podspec to deliver vendored framework.
+website: https://github.com/orbitekk/bitrise-step-binary-podspec.git
+source_code_url: https://github.com/orbitekk/bitrise-step-binary-podspec.git
+support_url: https://github.com/orbitekk/bitrise-step-binary-podspec.git
+host_os_tags:
+  - osx-10.10
+
+project_type_tags:
+  - ios
+  - macos
+
+type_tags:
+  - deploy
+
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+
+deps:
+  brew:
+    - name: jq
+    - name: sponge
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+inputs:
+  - podspec:
+    opts:
+      title: "Podspec path"
+      summary: ""
+      description: |
+        Podspec file path.
+      is_required: true
+  - name:
+    opts:
+      title: "Framework name"
+      summary: ""
+      description: |
+        The name of the archived framework.
+      is_required: true
+  - extension: "xcframework"
+    opts:
+      title: "Framework type"
+      summary: ""
+      description: |
+        The type of the archived framework.
+      is_required: true
+  - version: $APP_VERSION
+    opts:
+      title: "Framework version"
+      summary: ""
+      description: |
+        The version of the uploaded binary.
+      is_required: true
+  - artifact_url:
+    opts:
+      title: URL
+      summary: "Artifact URL"
+      is_required: true
+
+outputs:
+  - BINARY_PODSPEC_PATH:
+    opts:
+      title: Path to binary podspec
